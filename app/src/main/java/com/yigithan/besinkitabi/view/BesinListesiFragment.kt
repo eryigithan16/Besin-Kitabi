@@ -41,6 +41,15 @@ class BesinListesiFragment : Fragment() {
         besinListRecycler.layoutManager = LinearLayoutManager(context)
         besinListRecycler.adapter = recyclerBesinAdapter
 
+        swipeRefreshLayout.setOnRefreshListener {
+
+            besinYukleniyor.visibility = View.VISIBLE
+            besinHataMesaji.visibility = View.GONE
+            besinListRecycler.visibility = View.GONE
+            viewModel.refreshFromInternet()
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         observeLiveData()
         
     }
